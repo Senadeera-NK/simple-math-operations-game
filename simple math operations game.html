@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Javascript</title>
+  <script type='text/javascript' src='javascripts.js'></script>
+  <style>
+    body{
+      margin-left:400px;
+    }
+    #main{
+      display: none;
+    }
+    .formulaTable table{
+      /* border: 1px solid black; */
+      margin-left:50px;
+      width:350px;
+      height:50px;
+    }
+    .formulaTable td{
+      /* border: 1px solid black; */
+      width:5%;
+      height:50px;
+      text-align:center;
+    }
+    .NumberTable table {
+      /* border:1px solid black;  */
+      width:500px;
+      height:300px;  
+      text-align: center;
+    }
+    .NumberTable table td{
+       /* border:1px solid black;  */
+      width:83.5px;
+      height:60px;
+      color:rgb(59, 59, 187);
+    }
+    .NumberTable{
+      margin-top:50px;
+    }
+
+    #main-menu{
+      position:fixed;
+      height: 350px;
+      width:300px;
+      border:1px solid black;
+      background-color:#ffff;
+      margin-top:100px;
+      margin-left:100px;
+    }
+    #main-menu table{
+      margin-top:50px;
+    }
+    #main-menu td{
+      border: 1px solid black;
+      width:300px;
+      height:50px;
+      text-align: center;
+      font-weight:bold;
+      font-family: 'Luxurious Roman', cursive;
+      /* font-size: ; */
+    }
+    
+    #main-menu td:hover {
+     cursor:pointer;
+     background-color: rgba(206, 200, 200, 0.507);
+    }
+    #main-menu h1{
+      font-family: 'Luxurious Roman', cursive;
+      margin-left: 50px;
+      /* font-size:; */
+    }
+    #lost-popupBox, #won-popupBox{
+      display: none;
+      position:absolute;
+      margin: auto;
+      margin-top: 100px;
+      margin-left:100px;
+      border: 1px solid black;
+      width:300px;
+      height:150px;
+      background-color:#ffff;
+      text-align: center;
+      color: black;
+      z-index: 2;
+    }
+    #lost-popupBox p{
+      margin-top:30px;
+    }
+    #lost-popupBox table{
+      margin: auto;
+    }
+    #won-popupBox table {
+      margin:auto;
+      margin-top:20px;
+    }
+    #lost-popupBox td,#won-popupBox td {
+      width:100px;
+    }
+    #lost-popupBox button{
+      width:100px;
+      margin-top: 50px;
+      background-color:rgb(80, 214, 136) ;
+      border: 1px solid black;
+      text-align:center;
+    }
+    #won-popupBox button{
+      width:100px;
+      /* margin-top: 50px; */         /*-----necessary------*/
+      background-color:rgb(80, 214, 136) ;
+      border: 1px solid black;
+      text-align:center;
+    }
+    #lost-popupBox button:hover, #won-popupBox button:hover{
+      font-weight: bold;
+      background-color:rgb(79, 160, 112);
+    }
+  </style>
+</head>
+<body>
+  <div id="main-menu">
+    <h1> MAIN MENU</h1>
+    <table>
+      <tr><td onclick="newGame()">new game</td></tr>
+      <tr><td onclick="settings()">settings</td></tr>
+      <tr><td onclick="quit()">quit</td></tr>
+    </table>
+  </div>
+  <!--user-lost and user-won popup boxes tags started-->
+  <div id="lost-popupBox">
+    <p>try again !!!</p>
+    <table>
+      <tr>
+        <td><button  id="start-btn" onclick="userClickedLostYes()">YES</button></td>
+        <td><button id="end-btn" onclick="userClickedLostNo()">NO</button></td>
+      </tr>
+    </table>
+  </div>
+  <div id="won-popupBox">
+    <p>user won!!!</p>
+    <p>wanna play again ?</p>
+    <table>
+      <tr>
+        <td><button id="start-btn" onclick="userClickedWonYes()">YES</button></td>
+        <td><button id="end-btn" onclick="userClickedWonNo()">NO</button></td>
+      </tr>
+    </table>
+  </div>
+    <!--user-lost and user-won popup boxes tags ended-->
+
+  <div id="main">
+  <div class="formulaTable" id="demo">
+    <table>
+      <tr>
+        <td id="0"></td>
+        <td>+</td>
+        <td id="1"></td>
+      <td>+</td>
+      <td id="2"></td>
+       <td>+</td>
+       <td id="3"></td>
+       <td>=</td>
+       <td id="result"></td>
+      </tr>
+    </table>
+  </div>
+  <div class="NumberTable" id="demo2" function={numberPops()}>
+   <table>
+     <tr id="1">
+       <td id="10" onclick="userClicked(this)"></td>
+       <td id="11" onclick="userClicked(this)"></td>
+       <td id="12" onclick="userClicked(this)"></td>
+       <td id="13" onclick="userClicked(this)"></td>
+       <td id="14" onclick="userClicked(this)"></td>
+       <td id="15" onclick="userClicked(this)"></td>
+     </tr>
+     <tr id="2">
+      <td id="16" onclick="userClicked(this)"></td>
+      <td id="17" onclick="userClicked(this)"></td>
+      <td id="18" onclick="userClicked(this)"></td>
+      <td id="19" onclick="userClicked(this)"></td>
+      <td id="20" onclick="userClicked(this)"></td>
+      <td id="21" onclick="userClicked(this)"></td>
+    </tr>
+    <tr id="3">
+      <td id="22" onclick="userClicked(this)"></td>
+      <td id="23" onclick="userClicked(this)"></td>
+      <td id="24" onclick="userClicked(this)"></td>
+      <td id="25" onclick="userClicked(this)"></td>
+      <td id="26" onclick="userClicked(this)"></td>
+      <td id="27" onclick="userClicked(this)"></td>
+    </tr>
+    <tr id="4">
+      <td id="28" onclick="userClicked(this)"></td>
+      <td id="29" onclick="userClicked(this)"></td>
+      <td id="30" onclick="userClicked(this)"></td>
+      <td id="31" onclick="userClicked(this)"></td>
+      <td id="32" onclick="userClicked(this)"></td>
+      <td id="33" onclick="userClicked(this)"></td>
+    </tr>
+    <tr id="5">
+      <td id="34" onclick="userClicked(this)"></td>
+      <td id="35" onclick="userClicked(this)"></td>
+      <td id="36" onclick="userClicked(this)"></td>
+      <td id="37" onclick="userClicked(this)"></td>
+      <td id="38" onclick="userClicked(this)"></td>
+      <td id="39" onclick="userClicked(this)"></td>
+    </tr>
+   </table>
+  </div>
+  </div>
+  <script>
+
+    
+    var result;
+    var GlobalScopeObject = {}; 
+    function mathcal()
+    {
+      result = Math.floor((Math.random()*1000)+1);
+      document.getElementById("result").innerText=result;
+
+      var l = "---";
+      var m = "---";
+      var n = "---";
+      var o = "---";
+
+      var numberList = [l,m,n,o];
+
+      var i = Math.floor((Math.random()*4));
+      var u = Math.floor((Math.random()*4));
+      while(i==u){
+        var u = Math.floor((Math.random()*4));
+      }
+
+      numberList[i] = Math.floor((Math.random()*result)+1);
+      gap = result - numberList[i];
+      numberList[u] = Math.floor((Math.random()*gap)+1);
+
+      GlobalScopeObject.addedGeneretedNumber1 = numberList[i];
+      GlobalScopeObject.addedGeneretedNumber2 = numberList[u];
+
+      GlobalScopeObject.displayNumberResultsList = numberList; //- - - - - newly added - - - - - - //
+
+      //--------displaying formula on UI--------//
+       
+         var t = 0;
+         while (t<= 3){
+           document.getElementById(t.toString()).innerText = numberList[t];
+           t++;
+          }
+         }
+
+    mathcal();
+
+//---------------range function to output [start, start+1,start+1+1,.....end]----------//
+    function range(start,end){
+      var list = [];
+      for(i=start;i<=end;i++){
+        list.push(i);
+      }
+      return list;
+    }
+
+//----------function to pick given no of items from a list and return as another list------------//
+function outUniquePicks(numberOfItems,list){
+  var outList = [];
+  var listRange = list.length -1;
+
+
+  var outNumber = Math.floor((Math.random()*listRange)+1);
+    outList.push(list[outNumber]);
+
+    var i =1;
+  while(i<=(numberOfItems-1)){
+    var outNumber2 = Math.floor((Math.random()*listRange)+1);
+    if(!outList.includes(list[outNumber2])){
+        outList.push(list[outNumber2]);
+        i++;
+    }else{
+      continue;
+    }
+  }
+  return outList;
+}
+//--------------------result values--------------//
+function resultNumValues(){
+
+  var resultNumList = [];
+  var result1 = GlobalScopeObject.addedGeneretedNumber1;
+  var result2 = GlobalScopeObject.addedGeneretedNumber2;
+
+  var realResultRange = result - (result1 + result2);
+  var result3 = Math.floor((Math.random()*realResultRange)+1);
+  resultNumList.push(result3);
+
+  var result4 = result - (result1 + result2 + result3);
+  resultNumList.push(result4);
+
+  GlobalScopeObject.addedGeneretedNumber3 = result3;
+  GlobalScopeObject.addedGeneretedNumber4 = result4;
+
+  i = 1;
+  while(i<=4){
+    var randomResult = Math.floor((Math.random()*result)+1);
+    if(!resultNumList.includes(randomResult)){
+      resultNumList.push(randomResult);
+      i++;
+    }else{
+      continue;
+    }
+  }
+  return resultNumList;
+}
+//--------------putting values and displaying to according to that ids-------------//
+  function displayValues(l, m) {
+    var i = 0;
+    while (i <= 5) {
+      document.getElementById(l[i].toString()).innerText = m[i];
+      document.getElementById(l[i]).style.border="1px solid black";                 //---css fixing-----//
+      //console.log(DocumentTimeline.getElementById(l[i]).style.position);
+      i++;
+    }
+  }
+
+//---------------function to popup numbers in table----------------// 
+     function numberPops(){
+       var idslist = range(10,39);
+       var example = outUniquePicks(6,idslist);
+       return example;
+     }
+
+//-----------this is the main function, becareful playing--------------//
+     displayValues(numberPops(),resultNumValues());
+
+function realFormulaNumbersInList(){
+  var realFormulaNumbersList = [];
+  var result1 = GlobalScopeObject.addedGeneretedNumber1;
+  var result2 = GlobalScopeObject.addedGeneretedNumber2;
+  var result3 = GlobalScopeObject.addedGeneretedNumber3;
+  var result4 = GlobalScopeObject.addedGeneretedNumber4;
+  realFormulaNumbersList.push(result1,result2,result3,result4);
+
+  return realFormulaNumbersList;
+}
+//-------------------getting user results-----------------------//
+const userClickedNumberList = [];
+const spacesIDList = [];
+function userClicked(item){
+
+//--------replacing "---" with user entered numbers---------//
+var displayList = GlobalScopeObject.displayNumberResultsList;
+for(var i =0; i <= displayList.length-1;i++){
+  if(displayList[i] === "---"){
+    spacesIDList.push(i);
+  }
+}
+ document.getElementById(spacesIDList[0].toString()).innerText = item.innerText;
+ document.getElementById(spacesIDList[0].toString()).style.color = "rgb(59, 59, 187)";
+ spacesIDList.splice(0,1);
+console.log(spacesIDList); //display no of items that has in spacesIDSList
+
+console.log(resultNumValues());
+
+
+//---------including user entered two numbers to a list----------//
+  if(userClickedNumberList.length<2){
+    if(item.innerText!=""){
+    userClickedNumberList.push(item.innerText);
+    item.style.display = "none";
+    }
+  }
+
+  //-------checking whether user has won or not-------------------//
+
+  //to work only after user entered 2 numbers 
+  if(userClickedNumberList.length===2){
+  var displayOnlyNumList = [];
+  var resultNumberList = GlobalScopeObject.displayNumberResultsList;
+  for(var i = 0; i <= resultNumberList.length-1;i++){
+    if(resultNumberList[i] !== "---"){
+      displayOnlyNumList.push(resultNumberList[i]);
+    }
+  }console.log("displayed only numbers: "+displayOnlyNumList);
+         let confirmAction = displayOnlyNumList[0]+displayOnlyNumList[1]+parseInt(userClickedNumberList[0])+parseInt(userClickedNumberList[1]) === result;
+        if (confirmAction) {
+          document.getElementById("main").style.filter="blur(5px)";
+          document.getElementById("won-popupBox").style.display="block";
+        } else {
+          document.getElementById("main").style.filter="blur(5px)";
+          document.getElementById("lost-popupBox").style.display="block";
+        }
+  }
+}
+
+function userClickedWonYes(){
+  window.location.reload();
+}
+function userClickedLostYes(){
+  //-----------do after functions properly fixed ------------------//
+}
+function userClickedWonNo(){
+  document.getElementById("main").style.filter="none";
+  document.getElementById("won-popupBox").style.display="none";
+}
+function userClickedLostNo(){
+  document.getElementById("main").style.filter="none";
+  document.getElementById("lost-popupBox").style.display="none";
+}
+
+
+function newGame(){
+  document.getElementById("main").style.display="block";
+  document.getElementById("main-menu").style.display="none";
+}
+  
+
+//---------------function quit----------------//
+function quit(){
+  window.close();
+}
+  </script>
+</body>
+</html>
